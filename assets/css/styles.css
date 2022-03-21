@@ -1,0 +1,2 @@
+/* hides the scope icon in the admin area navigation */
+.layout-mainmenu .navbar ul.mainmenu-items[data-main-menu].mainmenu-extras > li.mainmenu-item.mainmenu-preview { display: none !important; }
