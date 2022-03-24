@@ -44,6 +44,13 @@ class Plugin extends PluginBase
         });
 
         /**
+         * Route all other front-end pages to admin area
+         */
+        Route::get('/{any}', function ($any) {
+              return Redirect::to('/backend');
+        })->where('any', '^(?!backend).*$');
+
+        /**
          * Stop if not running in admin area
          */
         if(!App::runningInBackend()){
