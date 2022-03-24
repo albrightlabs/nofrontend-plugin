@@ -4,7 +4,7 @@
 ### 🚨 Requires OctoberCMS 2.0
 
 ## ✨ What does this plugin do?
-Simply removes the applcation\'s front-end and redirects it to the admin area.
+Simply removes the application\'s front-end and redirects it to the admin area.
 
 ## ❓ Why would I use this plugin?
 Helpful for when you're building an application that has no front-end for users whatsoever.
