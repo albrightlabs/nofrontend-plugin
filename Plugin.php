@@ -3,6 +3,7 @@
 use App;
 use Route;
 use Event;
+use Config;
 use Backend;
 use Redirect;
 use System\Classes\PluginBase;
@@ -37,18 +38,26 @@ class Plugin extends PluginBase
     public function boot()
     {
         /**
+         * Define URIs for later
+         */
+        $backendUri = Config::get('backend.uri', 'backend');
+        $appUri = Config::get('app.url');
+
+        /**
          * Route homepage to admin area
          */
-        Route::get('/', function (){
-            return Redirect::to('/backend');
+        Route::get('/', function () use  ($backendUri, $appUri) {
+            return Redirect::to($appUri.''.$backendUri);
         });
 
         /**
          * Route all other front-end pages to admin area
          */
-        Route::get('/{any}', function ($any) {
-              return Redirect::to('/backend');
-        })->where('any', '^(?!backend).*$');
+        Route::get('/{any}', function ($any) use ($backendUri, $appUri) {
+            if(!App::runningInBackend()){
+                return Redirect::to($appUri.''.$backendUri);
+            }
+        })->where('any', '^(?!'.ltrim($backendUri, '/').').*$');
 
         /**
          * Stop if not running in admin area
